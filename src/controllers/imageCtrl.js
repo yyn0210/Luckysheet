@@ -10,6 +10,7 @@ import Store from '../store';
 import locale from '../locale/locale';
 import tooltip from '../global/tooltip';
 import method from '../global/method';
+import {checkIsAllowEdit} from "../global/validate";
 
 const imageCtrl = {
     imgItem: {
@@ -363,7 +364,10 @@ const imageCtrl = {
 
         //image active
         $("#luckysheet-image-showBoxs").off("mousedown.active").on("mousedown.active", ".luckysheet-modal-dialog-image", function(e) {
-            
+
+            if (!checkIsAllowEdit()) {
+                return;
+            }
 
             if(!checkProtectionAuthorityNormal(Store.currentSheetIndex, "editObjects",false)){
                 return;

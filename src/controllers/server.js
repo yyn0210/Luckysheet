@@ -95,10 +95,13 @@ const server = {
 	        value = null;
 	    }
 
+		let order = getSheetIndex(index)
+
 	    let d = {};
 	    d.t = type;
 	    d.i = index;
 	    d.v = value;
+		d.so = order
 
 		//切换sheet页不发后台，TODO：改为发后台+后台不广播
 		if(type === 'shs'){
@@ -215,19 +218,19 @@ const server = {
 					})
 				}
 	            if(type == 1){ //send 成功或失败
-                const oldIndex = data.data.v.index;
-                const sheetToUpdate = Store.luckysheetfile.filter((sheet)=> sheet.index === oldIndex)[0];
-                if (sheetToUpdate !== null) {
-                  setTimeout(() => {
-                    const index = data.data.i;
-                    sheetToUpdate.index = index;
-                    Store.currentSheetIndex = index;
-
-                    $(`#luckysheet-sheets-item${oldIndex}`).attr('data-index', index);
-                    $(`#luckysheet-sheets-item${oldIndex}`).prop('id', `luckysheet-sheets-item${index}`);
-                    $(`#luckysheet-datavisual-selection-set-${oldIndex}`).prop('id', `luckysheet-datavisual-selection-set-${index}`);
-                  }, 1);
-                }
+                // const oldIndex = data.data.v.index;
+                // const sheetToUpdate = Store.luckysheetfile.filter((sheet)=> sheet.index === oldIndex)[0];
+                // if (sheetToUpdate !== null) {
+                //   setTimeout(() => {
+                //     const index = data.data.i;
+                //     sheetToUpdate.index = index;
+                //     Store.currentSheetIndex = index;
+				//
+                //     $(`#luckysheet-sheets-item${oldIndex}`).attr('data-index', index);
+                //     $(`#luckysheet-sheets-item${oldIndex}`).prop('id', `luckysheet-sheets-item${index}`);
+                //     $(`#luckysheet-datavisual-selection-set-${oldIndex}`).prop('id', `luckysheet-datavisual-selection-set-${index}`);
+                //   }, 1);
+                // }
 	            }
 	            else if(type == 2){ //更新数据
 	                let item = JSON.parse(data.data);

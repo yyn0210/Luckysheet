@@ -160,7 +160,7 @@ const sheetmanage = {
         return curindex;
     },
     getCurSheet: function() {
-        if (Store.luckysheetfile.length) {
+        if (Store.luckysheetfile && Store.luckysheetfile.length) {
             let hasActive = false, indexs = []
             Store.luckysheetfile.forEach(item => {
                 if ('undefined' === typeof item.index) {
